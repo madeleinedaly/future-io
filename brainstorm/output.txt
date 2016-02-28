@@ -1,0 +1,28 @@
+ Some examples of what output could look like. Possible test outcomes:
+ 'success', 'failure', 'skipped', 'unstable' and 'indeterminate'.
+
+ ---
+ 4 tests passed.
+
+ ---
+ Test 'create a user' failed:
+     ERROR
+
+ Because of this error, the outcome of 3 dependant tests is indeterminate.
+
+
+ ---
+ Test 'create a user' is unstable.
+ The test ran by itself, but failed as a prerequisite for 'create a post':
+     ERROR
+
+
+ ---
+ Test 'post a comment' is indeterminate because a prerequisite failed:
+  ✓ create a user
+  ✓ create a post
+  ✗ publish a post
+  ? post a comment
+
+  Test 'publish a post' failed:
+     ERROR
