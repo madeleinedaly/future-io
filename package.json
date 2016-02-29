@@ -1,0 +1,26 @@
+{
+  "name": "macho",
+  "version": "0.1.0",
+  "description": "The functional test runner",
+  "main": "lib/test.js",
+  "bin": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stoeffel/macho.js.git"
+  },
+  "author": "Jasper Woudenberg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stoeffel/macho.js/issues"
+  },
+  "homepage": "https://github.com/stoeffel/macho.js#readme",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "figures": "^1.4.0",
+    "minimist": "^1.2.0",
+    "ramda": "^0.19.1"
+  }
+}
