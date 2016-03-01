@@ -6,6 +6,7 @@ exports.test1 = test(
   {},
   () => {
     assert(true);
+    return 42;
   }
 );
 
@@ -14,5 +15,13 @@ exports.test2 = test(
   {},
   () => {
     assert(false);
+  }
+);
+
+exports.test3 = test(
+  'test with dependency',
+  { x: exports.test1 },
+  (results) => {
+    assert.equal(results.x, 42);
   }
 );
