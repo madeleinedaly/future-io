@@ -5,7 +5,7 @@
   "main": "lib/test.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap test/*.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,8 @@
     "minimist": "^1.2.0",
     "parallel-future": "0.0.2",
     "ramda": "^0.19.1"
+  },
+  "devDependencies": {
+    "tap": "^5.7.0"
   }
 }
