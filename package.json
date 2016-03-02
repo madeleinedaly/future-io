@@ -24,7 +24,7 @@
     "figures": "^1.4.0",
     "futurize": "^1.0.2",
     "minimist": "^1.2.0",
-    "parallel-future": "0.0.1",
+    "parallel-future": "0.0.2",
     "ramda": "^0.19.1"
   }
 }
