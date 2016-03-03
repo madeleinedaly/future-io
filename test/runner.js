@@ -35,3 +35,15 @@ test('Runner reports a failing test', function (t) {
     t.end();
   });
 });
+
+
+test('Runner reports a indeterminate test', function (t) {
+  var tests = [sampleTests.requiringFailing];
+  run(tests).fork(t.notOk, function (outcome) {
+    t.equal(outcome.length, 1);
+    t.equal(outcome[0].description, 'requiring failing test');
+    t.equal(outcome[0].result, 'INDETERMINATE');
+    t.equal(outcome[0].failingDependency, sampleTests.failing.id);
+    t.end();
+  });
+});

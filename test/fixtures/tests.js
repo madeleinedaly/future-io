@@ -32,3 +32,11 @@ exports.requiring = Test(
     assert.equal(result.answer, 42);
   }
 );
+
+exports.requiringFailing = Test(
+  'requiring failing test',
+  { answers: exports.failing },
+  function () {
+    assert.equal(true);
+  }
+)

@@ -25,3 +25,11 @@ exports.test3 = test(
     assert.equal(results.x, 42);
   }
 );
+
+exports.test4 = test(
+  'test with failing dependency',
+  { x: exports.test2 },
+  () => {
+    assert.equal(true);
+  }
+)
