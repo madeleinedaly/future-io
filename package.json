@@ -5,7 +5,9 @@
   "main": "lib/test.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "npm-run-all test:*",
+    "test:unit": "tap test/*.js",
+    "test:fantasy": "mocha laws"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,9 @@
     "ramda": "^0.19.1"
   },
   "devDependencies": {
+    "fantasy-check": "^0.3.2",
+    "mocha": "^2.4.5",
+    "npm-run-all": "^1.5.1",
     "tap": "^5.7.0"
   }
 }
