@@ -22,6 +22,7 @@
     "daggy": "0.0.1",
     "data.task": "^3.0.0",
     "figures": "^1.4.0",
+    "fork-future": "0.0.1",
     "futurize": "^1.0.2",
     "minimist": "^1.2.0",
     "parallel-future": "0.0.2",
