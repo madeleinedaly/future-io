@@ -1,14 +1,11 @@
 #!/usr/bin/env node
 
 var R = require('ramda');
-var path = require('path');
 var fork = require('fork-future');
 var run = require('./lib/runner');
 var report = require('./lib/reporter');
 var io = require('./lib/io');
 
-var pathIO = R.liftN(2, path.join);
-var fileIO = pathIO(io.cwdIO(), io.path2testIO());
 var runFromPath = R.compose(run, loadTests);
 
 function loadTests (path) {
@@ -27,4 +24,9 @@ var cli = R.compose(
   runFromPath
 );
 
-io.runIO(R.map(cli, fileIO));
+var app = R.compose(
+  io.runIO,
+  R.map(cli)
+);
+
+app(io.fileIO);
