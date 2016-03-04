@@ -23,6 +23,7 @@
     "chalk": "^1.1.1",
     "daggy": "0.0.1",
     "data.task": "^3.0.0",
+    "fantasy-io": "0.0.1",
     "figures": "^1.4.0",
     "fork-future": "0.0.1",
     "futurize": "^1.0.2",
