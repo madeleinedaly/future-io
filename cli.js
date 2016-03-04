@@ -2,15 +2,13 @@
 
 var R = require('ramda');
 var path = require('path');
-var minimist = require('minimist');
 var fork = require('fork-future');
 var run = require('./lib/runner');
 var report = require('./lib/reporter');
 var io = require('./lib/io');
 
-var argv = minimist(process.argv.slice(2));
-
-var file = path.join(process.cwd(), argv._[0]);
+var pathIO = R.liftN(2, path.join);
+var fileIO = pathIO(io.cwdIO(), io.path2testIO());
 var runFromPath = R.compose(run, loadTests);
 
 function loadTests (path) {
@@ -29,4 +27,4 @@ var cli = R.compose(
   runFromPath
 );
 
-cli(file);
+io.runIO(R.map(cli, fileIO));
