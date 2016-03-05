@@ -34,4 +34,4 @@ var cli = R.composeK(
 // UNSAFECODE
 // ===============================
 // TODO: move this line to a separate file. Test everything above with a fake world.
-cli.run(node.realWorld);
+cli.unsafePerform(node.realWorld);
