@@ -12,8 +12,8 @@ var firstCliArg = R.compose(
   R.head,
   R.drop(2)
 );
-var pathJoin = R.curryN(2, path.join);
-var withBasePath = path => IO.of(pathJoin).ap(node.cwd()).ap(IO.of(path));
+var pathJoin = R.liftN(2, path.join);
+var withBasePath = path => pathJoin(node.cwd(), IO.of(path));
 var loadTestsFromFile = path => node.require(path).map(R.values);
 var runTests = tests => IO.task(
   resolve => run(tests).fork(
@@ -24,11 +24,11 @@ var runTests = tests => IO.task(
 
 var cli = R.composeK(
   node.log,
-  output => IO.of(report(output)),
+  R.compose(IO.of, report),
   runTests,
   loadTestsFromFile,
   withBasePath,
-  args => IO.of(firstCliArg(args))
+  R.compose(IO.of, firstCliArg)
 )(node.argv())
 
 // UNSAFECODE
