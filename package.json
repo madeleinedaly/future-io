@@ -1,9 +1,8 @@
 {
-  "name": "macho",
+  "name": "future-io",
   "version": "0.1.0",
-  "description": "The functional test runner",
-  "main": "lib/test.js",
-  "bin": "cli.js",
+  "description": "IO Monad for JS",
+  "main": "lib/index.js",
   "scripts": {
     "test": "npm-run-all test:*",
     "test:unit": "tap test/*.js",
@@ -11,24 +10,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stoeffel/macho.js.git"
+    "url": "git+https://github.com/futurize/future-io.git"
   },
-  "author": "Jasper Woudenberg",
+  "contributors": [
+    "schtoeffel",
+    "Jasper Woudenberg"
+  ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stoeffel/macho.js/issues"
+    "url": "https://github.com/futurize/future-io/issues"
   },
-  "homepage": "https://github.com/stoeffel/macho.js#readme",
+  "homepage": "https://github.com/futurize/future-io#readme",
   "dependencies": {
-    "chalk": "^1.1.1",
     "daggy": "0.0.1",
     "data.task": "^3.0.0",
-    "fantasy-io": "0.0.1",
-    "figures": "^1.4.0",
-    "fork-future": "0.0.1",
-    "futurize": "^1.0.2",
-    "minimist": "^1.2.0",
-    "parallel-future": "0.0.2",
     "ramda": "^0.19.1"
   },
   "devDependencies": {

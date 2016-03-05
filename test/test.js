@@ -1,52 +1,66 @@
-var test = require('tap').test;
-var sampleTests = require('./fixtures/tests');
+const test = require('tap').test;
+const Task = require('data.task');
+const R = require('ramda');
+const node = require('../lib/node');
+const FakeWorld = require('../lib/testUtils').FakeWorld;
+
+require('tap').pass();
 
 
-test('Succeeding test returns a future that will resolve', function (t) {
-  var test = sampleTests.succeeding;
-  test.fork(t.notOk, t.end);
-});
-
-
-test('Failing test returns a future that rejects with the failure error', function (t) {
-  var test = sampleTests.failing;
-  test.fork(
-    function (failure) {
-      t.equal(failure.failingTestId, test.id);
-      t.type(failure.error, 'Error');
-      t.equal(failure.error.message, 'failed');
+test('node.cwd', t => {
+  const cwd = '/foo';
+  const fakeWorld = new FakeWorld().$onCwd(R.always(cwd))
+  const io = node.cwd();
+  io
+    .map(x => {
+      t.equal(x, cwd);
       t.end();
-    },
-    t.notOk
-  );
+    })
+    .unsafePerform(fakeWorld);
 });
 
 
-test('Returning test returns a promise that resolves with the returned value', function (t) {
-  var test = sampleTests.returning;
-  test.fork(t.notOk, function (result) {
-    t.equal(result, 42);
-    t.end();
-  });
-});
-
-
-test('Test can require other tests', function (t) {
-  var test = sampleTests.requiring;
-  test.fork(t.notOk, t.end);
-});
-
-
-test('Test requiring a failing test fails itself', function (t) {
-  var test = sampleTests.requiringFailing;
-  test.fork(
-    function (failure) {
-      t.equal(failure.failingTestId, sampleTests.failing.id);
-      t.type(failure.error, 'Error');
-      t.equal(failure.error.message, 'failed');
+test('node.argv', t => {
+  const argv = ['/env/node'];
+  const fakeWorld = new FakeWorld().$setArgv(argv)
+  const io = node.argv();
+  io
+    .map(x => {
+      t.same(x, argv);
       t.end();
-    },
-    t.notOk
-  );
+    })
+    .unsafePerform(fakeWorld);
+});
 
+
+test('node.require', t => {
+  const modulePath = '/my/module';
+  const module = {};
+  const fakeWorld = new FakeWorld().$onRequire(_modulePath => {
+    t.equal(_modulePath, modulePath);
+    return module;
+  })
+  const io = node.require(modulePath);
+  io
+    .map(x => {
+      t.same(x, module);
+      t.end();
+    })
+    .unsafePerform(fakeWorld);
+});
+
+
+test('node.log', t => {
+  const line1 = 'foo';
+  const line2 = 'bar';
+  const fakeWorld = new FakeWorld().$onLog(output => {
+    console.log(output);
+    if (output === 'foo\nbar\n') {
+      t.ok(true);
+      t.end();
+    }
+  })
+  const io = node.log(line1)
+    .chain(() => node.log(line2))
+    .unsafePerform(fakeWorld);
 });
