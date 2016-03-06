@@ -23,8 +23,7 @@
   "homepage": "https://github.com/futurize/future-io#readme",
   "dependencies": {
     "daggy": "0.0.1",
-    "data.task": "^3.0.0",
-    "ramda": "^0.19.1"
+    "data.task": "3.0.0"
   },
   "devDependencies": {
     "fantasy-check": "^0.3.2",
