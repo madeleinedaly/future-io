@@ -1,7 +1,9 @@
 const test = require('tap').test;
-const Task = require('data.task');
+const RF = require('ramda-fantasy');
 const node = require('../').node;
 const FakeWorld = require('../').testUtils.FakeWorld;
+
+const Just = RF.Maybe.Just;
 
 test('node.cwd', t => {
   const cwd = '/foo';
@@ -39,7 +41,7 @@ test('node.require', t => {
   const io = node.require(modulePath);
   io
     .map(x => {
-      t.same(x, module);
+      t.same(x, Just(module));
       t.end();
     })
     .unsafePerform(fakeWorld);
