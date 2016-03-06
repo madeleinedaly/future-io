@@ -2,7 +2,7 @@ var functor = require('fantasy-check/src/laws/functor');
 var applicative = require('fantasy-check/src/laws/applicative');
 var monad = require('fantasy-check/src/laws/monad');
 var obey = require('./obey');
-var IO = require('../lib');
+var IO = require('../').IO;
 
 var run = function (io) {
   return io.unsafePerform({});

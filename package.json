@@ -2,7 +2,7 @@
   "name": "future-io",
   "version": "0.1.0",
   "description": "IO Monad for JS",
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "npm-run-all test:*",
     "test:unit": "tap test/*.js",

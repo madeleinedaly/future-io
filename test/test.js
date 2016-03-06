@@ -1,11 +1,8 @@
 const test = require('tap').test;
 const Task = require('data.task');
 const R = require('ramda');
-const node = require('../lib/node');
-const FakeWorld = require('../lib/testUtils').FakeWorld;
-
-require('tap').pass();
-
+const node = require('../').node;
+const FakeWorld = require('../').testUtils.FakeWorld;
 
 test('node.cwd', t => {
   const cwd = '/foo';
