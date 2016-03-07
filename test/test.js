@@ -31,6 +31,18 @@ test('node.argv', t => {
 });
 
 
+test('node.exit', t => {
+  const fakeWorld = new FakeWorld()
+  const io = node.exit(1);
+  io
+    .map(x => {
+      t.equal(x, 1);
+      t.end();
+    })
+    .unsafePerform(fakeWorld);
+});
+
+
 test('node.require', t => {
   const modulePath = '/my/module';
   const module = {};
