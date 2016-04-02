@@ -1,9 +1,8 @@
 const test = require('tap').test
-const RF = require('ramda-fantasy')
 const node = require('../').node
 const FakeWorld = require('../').testUtils.FakeWorld
 
-const Just = RF.Maybe.Just
+//TODO: add tests for IO error handling.
 
 test('node.cwd', (t) => {
   const cwd = '/foo'
@@ -14,7 +13,7 @@ test('node.cwd', (t) => {
       t.equal(x, cwd)
       t.end()
     })
-    .unsafePerform(fakeWorld)
+    .unsafePerform(fakeWorld, t.notOk)
 })
 
 test('node.argv', (t) => {
@@ -26,7 +25,7 @@ test('node.argv', (t) => {
       t.same(x, argv)
       t.end()
     })
-    .unsafePerform(fakeWorld)
+    .unsafePerform(fakeWorld, t.notOk)
 })
 
 test('node.exit', (t) => {
@@ -37,7 +36,7 @@ test('node.exit', (t) => {
       t.equal(x, 1)
       t.end()
     })
-    .unsafePerform(fakeWorld)
+    .unsafePerform(fakeWorld, t.notOk)
 })
 
 test('node.require', (t) => {
@@ -50,10 +49,10 @@ test('node.require', (t) => {
   const io = node.require(modulePath)
   io
     .map((x) => {
-      t.same(x, Just(module))
+      t.same(x, module)
       t.end()
     })
-    .unsafePerform(fakeWorld)
+    .unsafePerform(fakeWorld, t.notOk)
 })
 
 test('node.log', (t) => {
@@ -68,7 +67,7 @@ test('node.log', (t) => {
   const io = node.log(line1)
   io
     .chain(() => node.log(line2))
-    .unsafePerform(fakeWorld)
+    .unsafePerform(fakeWorld, t.notOk)
 })
 
 test('node.readFile', (t) => {
@@ -83,10 +82,10 @@ test('node.readFile', (t) => {
   const io = node.readFile(options, filePath)
   io
     .map((x) => {
-      t.same(x, RF.Either.Right(contents))
+      t.same(x, contents)
       t.end()
     })
-    .unsafePerform(fakeWorld)
+    .unsafePerform(fakeWorld, t.notOk)
 })
 
 test('node.writeFile', (t) => {
@@ -104,5 +103,5 @@ test('node.writeFile', (t) => {
     .map((x) => {
       t.end()
     })
-    .unsafePerform(fakeWorld)
+    .unsafePerform(fakeWorld, t.notOk)
 })
