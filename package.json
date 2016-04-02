@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm-run-all test:*",
+    "test:lint": "standard",
     "test:unit": "tap test/*.js",
     "test:fantasy": "mocha laws"
   },
@@ -30,6 +31,8 @@
     "fantasy-check": "^0.3.2",
     "mocha": "^2.4.5",
     "npm-run-all": "^1.5.1",
+    "standard": "^6.0.8",
+    "standard-format": "^2.1.1",
     "tap": "^5.7.0"
   }
 }
