@@ -2,7 +2,7 @@ const test = require('tap').test
 const node = require('../').node
 const FakeWorld = require('../').testUtils.FakeWorld
 
-//TODO: add tests for IO error handling.
+// TODO: add tests for IO error handling.
 
 test('node.cwd', (t) => {
   const cwd = '/foo'
@@ -105,3 +105,20 @@ test('node.writeFile', (t) => {
     })
     .unsafePerform(fakeWorld, t.notOk)
 })
+
+test('node.stat', (t) => {
+  const filePath = '/my/file'
+  const stat = {}
+  const fakeWorld = new FakeWorld().$onStat((_filePath, callback) => {
+    t.equal(_filePath, filePath)
+    return callback(null, stat)
+  })
+  const io = node.stat(filePath)
+  io
+    .map((x) => {
+      t.same(x, stat)
+      t.end()
+    })
+    .unsafePerform(fakeWorld, t.notOk)
+})
+
