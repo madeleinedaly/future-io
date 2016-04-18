@@ -19,7 +19,7 @@ test('node.cwd', (t) => {
 test('node.argv', (t) => {
   const argv = ['/env/node']
   const fakeWorld = new FakeWorld().$setArgv(argv)
-  const io = node.argv()
+  const io = node.argv
   io
     .map((x) => {
       t.same(x, argv)
@@ -79,7 +79,7 @@ test('node.readFile', (t) => {
     t.same(_options, options)
     return callback(null, contents)
   })
-  const io = node.readFile(options, filePath)
+  const io = node.fs.readFile(filePath, options)
   io
     .map((x) => {
       t.same(x, contents)
@@ -98,7 +98,7 @@ test('node.writeFile', (t) => {
     t.equal(_contents, contents)
     return callback()
   })
-  const io = node.writeFile(options, filePath, contents)
+  const io = node.fs.writeFile(filePath, contents, options)
   io
     .map((x) => {
       t.end()
@@ -113,7 +113,7 @@ test('node.stat', (t) => {
     t.equal(_filePath, filePath)
     return callback(null, stat)
   })
-  const io = node.stat(filePath)
+  const io = node.fs.stat(filePath)
   io
     .map((x) => {
       t.same(x, stat)
