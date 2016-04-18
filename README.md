@@ -8,6 +8,8 @@ At the moment only a limited set of operations is supported.
 - `node.require :: Path -> IO Module`
 - `node.cwd :: () -> IO Path`
 - `node.argv :: () -> IO [Arg]`
+- `node.readFile :: Options -> Path -> IO String`
+- `node.writeFile :: Options -> Path -> Content -> IO ()`
 
 Contributions adding more operations are welcomed!
 
@@ -16,9 +18,10 @@ Contributions adding more operations are welcomed!
 const node = require('io').node;
 
 const logCwd = node.cwd().chain(node.log);
+const onIOError = (error) => console.log(error);
 
 //Run the program.
-logCwd.unsafePerform(node.realWorld);
+logCwd.unsafePerform(node.realWorld, onIOError);
 ```
 
 ## Testing your application
@@ -40,7 +43,7 @@ it('logs the current workding directory', done => {
       }
     });
 
-  logCwd.unsafePerform(fakeWorld);
+  logCwd.unsafePerform(fakeWorld, done);
 });
 ```
 
