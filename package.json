@@ -1,0 +1,29 @@
+{
+  "name": "future-io",
+  "version": "0.1.0",
+  "description": "IO Monad for JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm-run-all test:*",
+    "test:lint": "standard",
+    "test:unit": "tap test/*.js",
+    "test:fantasy": "mocha laws"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futurize/future-io.git"
+  },
+  "contributors": [
+    "schtoeffel",
+    "Jasper Woudenberg"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/futurize/future-io/issues"
+  },
+  "homepage": "https://github.com/futurize/future-io#readme",
+  "dependencies": {
+    "daggy": "0.0.1",
+    "data.task": "^3.1.0"
+  }
+}

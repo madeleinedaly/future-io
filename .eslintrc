@@ -1,0 +1,9 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "node": 2
+  },
+  "rules": {
+    "no-undef": 2,
+  }
+}
