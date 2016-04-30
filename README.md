@@ -1,6 +1,19 @@
 # future-io
+An [fantasy-land](https://github.com/fantasyland/fantasy-land) compliant monadic IO library for Node.js.
 
-An fantasyland compliant IO monad library for Node.js.
+Example of building a simple cli app that tells you if a number is even:
+
+```js
+#!/usr/bin/node
+
+const io = require('io')
+
+const even = io.argv()
+  .map(argv => (parseInt(argv[2]) % 2) === 0)
+  .chain(io.log)
+
+io.unsafePerform(even)
+```
 
 # API
 
@@ -27,7 +40,7 @@ If the IO represents an error value, this function will throw.
 If this is not what you want, use `IO.prototype.catch`.
 
 ## IO methods
-IO implements the [fantasy-land](https://github.com/fantasyland/fantasy-land#monad) Functor, Apply and Monad specifications.
+IO implements the [fantasy-land](https://github.com/fantasyland/fantasy-land) Functor, Apply and Monad specifications.
 
 ### `IO.of :: a -> IO e a`
 Wrap a value in an IO.
@@ -80,7 +93,7 @@ When the IO execution finishes, fakePerform triggers a last `end` action.
 This action is passed an `ioError`, if one exists, in the first-argument position.
 
 
-## Example using [ava](https://github.com/sindresorhus/ava#assertions) and async/await
+## Example using [ava](https://github.com/sindresorhus/ava) and async/await
 ```js
 import test from 'ava'
 import io from 'future-io'
@@ -102,7 +115,7 @@ test('logging the current working directory', async t => {
 })
 ```
 
-## Example using [mocha](https://github.com/sindresorhus/ava#assertions) and [co](https://github.com/tj/co)
+## Example using [mocha](https://github.com/sindresorhus/ava) and [co](https://github.com/tj/co)
 ```js
 import co from 'co'
 import io from 'future-io'

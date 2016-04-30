@@ -3,7 +3,7 @@ import Task from 'data.task'
 import IO from '../lib/io'
 import unsafePerform from '../lib/unsafe-perform'
 
-test.cb.only('runs io functions', (t) => {
+test.cb('runs io functions', (t) => {
   t.plan(2)
 
   const ioFunction = () => IO(
