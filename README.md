@@ -1,7 +1,7 @@
 # future-io
 An [fantasy-land](https://github.com/fantasyland/fantasy-land) compliant monadic IO library for Node.js.
 
-Example of building a simple cli app that tells you if a number is even:
+Building a simple cli that tells you if a number is even can look something like this:
 
 ```js
 #!/usr/bin/node
@@ -19,13 +19,14 @@ io.unsafePerform(even)
 # API
 
 ## IO-returning functions
-To get you going quickly, this library seeks to implement the complete set of node IO operations,
-exposing them on modules mimicking those found in the standard library.
-This is still a work in progress.
-If you're missing, please feel free to open an issue or pull request.
+To get you started fast this library mimics the interface of the native node modules.
+It just returns io's instead of taking callbacks!
+
+Getting complete coverage of all io related functionality in node is still a work in progress.
+If you're missing something, please feel free to open an issue or pull request.
 
 At the moment the following modules are exported.
-For some recipes check out the examples directory.
+For some recipes demonstrating their use check out the examples directory.
 
 ### `future-io/console`
 
@@ -38,8 +39,8 @@ For some recipes check out the examples directory.
 ## performing IO actions
 
 ### `unsafePerform :: IO e a -> ()`
-This will execute the IO.
-If the IO represents an error value, this function will throw.
+This will execute the io.
+If the io represents an error value, this function will throw.
 If this is not what you want, use `IO.prototype.catch`.
 
 ## IO methods
@@ -58,7 +59,7 @@ IO implements the [fantasy-land](https://github.com/fantasyland/fantasy-land) Fu
 ### `IO.prototype.catch :: IO e a ~> (e -> IO f a) -> IO f a`
 
 ## Wrapping custom IO functions
-Often you'll find the need to define your own IO functions, or wrap those provided by a library.
+Often you'll find the need to define your own io returning functions, or wrap functions provided by a library.
 Luckily, this is very simple:
 
 ```js
@@ -73,21 +74,22 @@ Luckily, this is very simple:
 ```
 
 # Testing
-Testing code performing a lot of IO is usually pretty hard and involves a lot of mocks.
-Not so when using IO!
+Testing code performing a lot of IO is usually pretty painful.
+Not so when using future-io!
+
 Simply use `fakePerform` instead of `unsafePerform` to execute your IO actions in tests.
-Now you can step through your IO calls step by step,
-checking which arguments they are being called with and returning mock values.
+Now you can step through your io functions step by step,
+checking the arguments being passed in and choosing values to return.
 
 `fakePerform()` return an object with three methods:
 - `take(actionName)`: Proceed until the next action call.
   Assert it has type `actionName`.
-  Returns a promise containg the arguments the action is being called with as an array
+  Return a promise containg the arguments the action is being called with as an array
 - `put(returnValue)`: Call after a `take` resolves to send a return value.
   Also call this when not returning a value, to ensure execution of the IO continues.
 - `error(ioError)`: Like `put`, but returns an error value.
 
-When the IO execution finishes, fakePerform triggers a last `end` action.
+When the io execution finishes, fakePerform triggers a last `end` action.
 This action is passed an `ioError`, if one exists, in the first-argument position.
 
 
@@ -136,4 +138,3 @@ it('logs the current working directory', co.wrap(function* () {
   assert.ifError(ioError)
 }))
 ```
-
