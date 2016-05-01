@@ -1,4 +1,4 @@
-const wrapFunction = require('./lib/wrap-function')
+const wrapFunction = require('../lib/wrap-function')
 
 exports.require = wrapFunction(
   'module.require',

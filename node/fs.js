@@ -1,4 +1,4 @@
-const wrapFunction = require('./lib/wrap-function')
+const wrapFunction = require('../lib/wrap-function')
 const fs = require('mz/fs')
 
 const api = Object.keys(fs)

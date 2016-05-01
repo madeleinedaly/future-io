@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-const ioProcess = require('../process')
+const ioProcess = require('../node/process')
 const io = require('../')
 
 const even = ioProcess.argv

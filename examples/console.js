@@ -1,5 +1,5 @@
 const io = require('../')
-const ioConsole = require('../console')
+const ioConsole = require('../node/console')
 
 const logPenguins = ioConsole.log('Emperor, Gentoo, Royal')
 

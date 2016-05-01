@@ -1,5 +1,5 @@
 import test from 'ava'
-import fs from '../fs'
+import fs from '../node/fs'
 import extract from './helpers/extract'
 
 // librarization of `fs` is generic, so we're just testing a single module here.

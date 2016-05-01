@@ -7,7 +7,7 @@ Building a simple cli that tells you if a number is even can look something like
 #!/usr/bin/node
 
 const io = require('future-io')
-const ioProcess = require('future-io/process')
+const ioProcess = require('future-io/node/process')
 
 const even = ioProcess.argv
   .map(argv => (parseInt(argv[2]) % 2) === 0)
@@ -28,13 +28,13 @@ If you're missing something, please feel free to open an issue or pull request.
 At the moment the following modules are exported.
 For some recipes demonstrating their use check out the examples directory.
 
-### `future-io/console`
+### `future-io/node/console`
 
-### `future-io/fs`
+### `future-io/node/fs`
 
-### `future-io/module`
+### `future-io/node/module`
 
-### `future-io/process`
+### `future-io/node/process`
 
 ## performing IO actions
 
@@ -97,7 +97,7 @@ This action is passed an `ioError`, if one exists, in the first-argument positio
 ```js
 import test from 'ava'
 import io from 'future-io'
-import ioProcess from 'future-io/process'
+import ioProcess from 'future-io/node/process'
 
 test('logging the current working directory', async t => {
   const io = ioProcess.cwd().chain(ioProcess.stdout.write)

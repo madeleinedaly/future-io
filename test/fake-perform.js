@@ -1,7 +1,7 @@
 import test from 'ava'
 
 import IO from '../lib/io'
-import ioProcess from '../process'
+import ioProcess from '../node/process'
 import fakePerform from '../lib/fake-perform'
 
 test('happy flow', async (t) => {

@@ -1,5 +1,5 @@
 const io = require('../')
-const fs = require('../fs')
+const fs = require('../node/fs')
 
 const penguinFile = '/tmp/penguins'
 const newPenguins = 'Emperor, Gentoo, Royal'

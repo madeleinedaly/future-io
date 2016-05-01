@@ -1,4 +1,4 @@
-const wrapFunction = require('./lib/wrap-function')
+const wrapFunction = require('../lib/wrap-function')
 
 const consoleMethods = ['assert', 'dir', 'error', 'info', 'log', 'time', 'timeEnd', 'trace', 'warn']
 consoleMethods.forEach(
