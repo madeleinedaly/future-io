@@ -6,11 +6,12 @@ Example of building a simple cli app that tells you if a number is even:
 ```js
 #!/usr/bin/node
 
-const io = require('io')
+const io = require('future-io')
+const ioProcess = require('future-io/process')
 
-const even = io.argv()
+const even = ioProcess.argv
   .map(argv => (parseInt(argv[2]) % 2) === 0)
-  .chain(io.log)
+  .chain(even => ioProcess.stdout.write('Is even: ' + even))
 
 io.unsafePerform(even)
 ```
@@ -21,16 +22,19 @@ io.unsafePerform(even)
 To get you going quickly, this library seeks to implement the complete set of node IO operations,
 exposing them on modules mimicking those found in the standard library.
 
-At the moment the following methods are supported.
-All take the same arguments as their standard counterparts, but no callbacks.
+This is still a work in progress.
+If you're missing, please feel free to open an issue or pull request.
 
-### global
-```
-```
+At the moment the following modules are exported.
+For some recipes check out the examples directory.
 
-### fs
-```
-```
+### `future-io/console`
+
+### `future-io/fs`
+
+### `future-io/module`
+
+### `future-io/process`
 
 ## performing IO actions
 

@@ -1,0 +1,10 @@
+#!/usr/bin/node
+
+const ioProcess = require('../process')
+const io = require('../')
+
+const even = ioProcess.argv
+  .map(argv => (parseInt(argv[2]) % 2) === 0)
+  .chain(even => ioProcess.stdout.write('Is even: ' + even))
+
+io.unsafePerform(even)

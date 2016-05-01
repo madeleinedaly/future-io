@@ -1,18 +1,18 @@
 import test from 'ava'
 
 import IO from '../lib/io'
-import lib from '../lib/lib-node'
+import ioProcess from '../process'
 import fakePerform from '../lib/fake-perform'
 
 test('happy flow', async (t) => {
-  const io = lib.cwd().chain(lib.log)
+  const io = ioProcess.cwd().chain(ioProcess.stdout.write)
   const { put, take } = fakePerform(io)
   const cwd = '/home/foo'
 
-  await take('cwd')
+  await take('process.cwd')
   put(cwd)
 
-  const [ loggedCwd ] = await take('log')
+  const [ loggedCwd ] = await take('process.stdout.write')
   t.is(loggedCwd, cwd)
   put()
 
@@ -21,10 +21,10 @@ test('happy flow', async (t) => {
 })
 
 test('using `IO.of`', async (t) => {
-  const io = IO.of('foo').chain(lib.log)
+  const io = IO.of('foo').chain(ioProcess.stdout.write)
   const { put, take } = fakePerform(io)
 
-  const [ loggedString ] = await take('log')
+  const [ loggedString ] = await take('process.stdout.write')
   t.is(loggedString, 'foo')
   put()
 
@@ -42,10 +42,10 @@ test('using `IO.error`', async (t) => {
 })
 
 test('throwing an io error', async (t) => {
-  const io = lib.cwd().chain(lib.log)
+  const io = ioProcess.cwd().chain(ioProcess.stdout.write)
   const { error, take } = fakePerform(io)
 
-  await take('cwd')
+  await take('process.cwd')
   const cwdError = new Error('cwd failed')
   error(cwdError)
 
@@ -54,13 +54,13 @@ test('throwing an io error', async (t) => {
 })
 
 test('expecting the wrong call', async (t) => {
-  const io = lib.cwd().chain(lib.log)
+  const io = ioProcess.cwd().chain(ioProcess.stdout.write)
   const { take } = fakePerform(io)
 
   const failingTake = take('wrongCall')
   t.throws(
     failingTake,
-    'Expected io "wrongCall" call but got "cwd" call instead.'
+    'Expected io "wrongCall" call but got "process.cwd" call instead.'
   )
 })
 
@@ -76,16 +76,16 @@ test('waiting for a call that doesn\'t come', async (t) => {
 })
 
 test('catching an io error', async (t) => {
-  const io = lib.cwd()
+  const io = ioProcess.cwd()
     .catch((error) => IO.of(error.message))
-    .chain(lib.log)
+    .chain(ioProcess.stdout.write)
   const { put, error, take } = fakePerform(io)
 
-  await take('cwd')
+  await take('process.cwd')
   const cwdError = new Error('cwd failed')
   error(cwdError)
 
-  const [ loggedString ] = await take('log')
+  const [ loggedString ] = await take('process.stdout.write')
   t.is(loggedString, cwdError.message)
   put()
 
