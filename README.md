@@ -21,7 +21,6 @@ io.unsafePerform(even)
 ## IO-returning functions
 To get you going quickly, this library seeks to implement the complete set of node IO operations,
 exposing them on modules mimicking those found in the standard library.
-
 This is still a work in progress.
 If you're missing, please feel free to open an issue or pull request.
 
@@ -47,32 +46,27 @@ If this is not what you want, use `IO.prototype.catch`.
 IO implements the [fantasy-land](https://github.com/fantasyland/fantasy-land) Functor, Apply and Monad specifications.
 
 ### `IO.of :: a -> IO e a`
-Wrap a value in an IO.
 
 ### `IO.error :: e -> IO e a`
-Wrap a value in an IO error.
 
 ### `IO.prototype.map :: IO e a ~> (a -> b) -> IO e b`
-Map over an IO.
 
 ### `IO.prototype.ap :: IO e (a -> b) ~> IO e a -> IO e b`
-Apply a function in an IO to a value in another IO, returning the result in an IO.
 
 ### `IO.prototype.chain :: IO e a ~> (a -> IO e b) -> IO e b`
-Take a value in an IO and apply a function returning an new IO to it.
 
 ### `IO.prototype.catch :: IO e a ~> (e -> IO f a) -> IO f a`
-jike `IO.prototype.chain`, but working on the error value in an IO.
-
 
 ## Wrapping custom IO functions
 Often you'll find the need to define your own IO functions, or wrap those provided by a library.
 Luckily, this is very simple:
 
 ```js
+  const io = require('future-io')
+
   // Wrapping a function performing some side effects in an IO.
   // The `customOperation` function should return a promise, task or plan value.
-  const customIO = wrapMethod(
+  const customIO = io.wrapMethod(
     'customOperation',
     customOperation
   )
@@ -101,18 +95,19 @@ This action is passed an `ioError`, if one exists, in the first-argument positio
 ```js
 import test from 'ava'
 import io from 'future-io'
+import ioProcess from 'future-io/process'
 
 test('logging the current working directory', async t => {
-  const logCwd = io.cwd().chain(io.log)
-  const { put, take } = io.fakePerform(logCwd)
+  const io = ioProcess.cwd().chain(ioProcess.stdout.write)
+  const { put, take } = fakePerform(io)
   const cwd = '/home/foo'
 
-  await take('cwd')
+  await take('process.cwd')
   put(cwd)
 
-  const [ loggedCwd ] = await take('log')
+  const [ loggedCwd ] = await take('process.stdout.write')
   t.is(loggedCwd, cwd)
-  await put()
+  put()
 
   const [ ioError ] = await take('end')
   t.falsy(ioError)
@@ -126,14 +121,14 @@ import io from 'future-io'
 import assert from 'assert'
 
 it('logs the current working directory', co.wrap(function* () {
-  const logCwd = io.cwd().chain(io.log)
-  const { put, take } = fakePerform(logCwd)
+  const io = ioProcess.cwd().chain(ioProcess.stdout.write)
+  const { put, take } = fakePerform(io)
   const cwd = '/home/foo'
 
-  yield take('cwd')
+  yield take('process.cwd')
   yield put(cwd)
 
-  const [ loggedCwd ] = yield take('log')
+  const [ loggedCwd ] = yield take('process.stdout.write')
   assert.equal(loggedCwd, cwd)
   put()
 
