@@ -19,10 +19,10 @@ exports.argv = wrapFunction(
 
 exports.exit = wrapFunction(
   'process.exit',
-  () => process.exit
+  process.exit
 )
 
 exports.cwd = wrapFunction(
   'process.cwd',
-  () => process.cwd
+  process.cwd
 )
