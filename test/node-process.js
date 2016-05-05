@@ -7,6 +7,6 @@ test('fs.argv', async (t) => {
   const { name, args, value, error } = await extract(io)
   t.is(name, 'process.argv')
   t.deepEqual(args, [])
-  t.deepEqual(value, process.argv)
   t.falsy(error)
+  t.deepEqual(value, process.argv)
 })

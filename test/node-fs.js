@@ -8,6 +8,6 @@ test('fs.exists', async (t) => {
   const { name, args, value, error } = await extract(io)
   t.is(name, 'fs.exists')
   t.deepEqual(args, [__filename])
-  t.is(value, true)
   t.falsy(error)
+  t.is(value, true)
 })

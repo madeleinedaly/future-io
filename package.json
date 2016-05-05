@@ -29,10 +29,12 @@
     "parser": "babel-eslint"
   },
   "dependencies": {
+    "callsite": "^1.0.0",
     "daggy": "0.0.1",
     "data.task": "^3.1.0",
     "is-promise": "^2.1.0",
-    "mz": "^2.4.0"
+    "mz": "^2.4.0",
+    "resolve": "^1.1.7"
   },
   "devDependencies": {
     "ava": "^0.14.0",
