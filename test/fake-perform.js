@@ -1,5 +1,4 @@
 import test from 'ava'
-
 import IO from '../lib/io'
 import ioProcess from '../node/process'
 import fakePerform from '../lib/fake-perform'

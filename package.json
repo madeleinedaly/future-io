@@ -40,6 +40,7 @@
     "ava": "^0.14.0",
     "babel-eslint": "^6.0.4",
     "co": "^4.6.0",
+    "fantasy-land": "^0.2.1",
     "npm-run-all": "^1.8.0",
     "nyc": "^6.4.2",
     "standard": "^6.0.8"
