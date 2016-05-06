@@ -4,5 +4,7 @@ const fs = require('mz/fs')
 const api = Object.keys(fs)
 
 api.forEach((name) => {
-  exports[name] = wrapFunction('fs.' + name, fs[name])
+  if (typeof fs[name] === 'function') {
+    exports[name] = wrapFunction('fs.' + name, fs[name])
+  }
 })
