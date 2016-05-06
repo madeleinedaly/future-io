@@ -1,5 +1,9 @@
 # future-io
-An [fantasy-land](https://github.com/fantasyland/fantasy-land) compliant monadic IO library for Node.js.
+[![NPM version](http://img.shields.io/npm/v/future-io.svg?style=flat-square)](https://www.npmjs.com/package/future-io)
+[![Build status](http://img.shields.io/travis/futurize/future-io/master.svg?style=flat-square)](https://travis-ci.org/futurize/future-io)
+[![Dependencies](https://img.shields.io/david/futurize/future-io.svg?style=flat-square)](https://david-dm.org/futurize/future-io)
+
+A [fantasy-land](https://github.com/fantasyland/fantasy-land) compliant monadic IO library for Node.js.
 
 Building a simple cli that tells you if a number is even can look something like this:
 
