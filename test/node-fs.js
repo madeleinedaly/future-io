@@ -6,6 +6,7 @@ import extract from './helpers/extract'
 // librarization of `fs` is generic, so we're just testing a single module here.
 test('fs.exists', async (t) => {
   const io = fs.exists(__filename)
+    .map(x => x.die())
 
   // Fake perform.
   const { take } = fakePerform(io)
