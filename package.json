@@ -35,9 +35,8 @@
   },
   "devDependencies": {
     "ava": "^0.16.0",
-    "babel-eslint": "^6.0.4",
+    "babel-eslint": "^7.1.0",
     "co": "^4.6.0",
-    "fantasy-land": "^0.3.0",
     "npm-run-all": "^3.0.0",
     "nyc": "^8.0.0",
     "standard": "^8.0.0",
