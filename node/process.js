@@ -21,6 +21,11 @@ function create (Task, methods) {
     () => process.argv
   )()
 
+  var env = wrapFunction(
+    'process.env',
+    () => process.env
+  )()
+
   var exit = wrapFunction(
     'process.exit',
     process.exit
@@ -35,6 +40,7 @@ function create (Task, methods) {
     stdout : stdout,
     stderr : stderr,
     argv : argv,
+    env : env,
     exit : exit,
     cwd : cwd
   }
